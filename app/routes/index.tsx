@@ -1,6 +1,7 @@
 import { flatGroup } from "d3-array";
 import { scaleQuantize } from "d3-scale";
 import { addDays, getHours } from "date-fns";
+import { utcToZonedTime } from "date-fns-tz";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import type { LoaderFunction } from "remix";
@@ -49,7 +50,10 @@ export const loader: LoaderFunction = async ({ request }) => {
         x < maxHours * REST_RATIO ? (x > 0 ? "🟩" : "⬜") : "🟨";
       squares = daily.map(([date, entries]) => {
         const quantized: any = flatGroup(
-          entries.map((d) => [hourScale(getHours(new Date(d.start))), d.dur]),
+          entries.map((d) => [
+            hourScale(getHours(utcToZonedTime(new Date(d.start), me.timezone))),
+            d.dur,
+          ]),
           (d) => d[0]
         )
           .map(([hour, d]) => [

@@ -646,16 +646,6 @@ select {
   display: grid;
 }
 
-.w-min {
-  width: -webkit-min-content;
-  width: -moz-min-content;
-  width: min-content;
-}
-
-.w-auto {
-  width: auto;
-}
-
 .max-w-sm {
   max-width: 24rem;
 }
@@ -670,10 +660,6 @@ select {
 
 .items-center {
   align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
 }
 
 .justify-between {

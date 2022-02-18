@@ -122,7 +122,7 @@ export default function Index() {
       >
         <div className="flex flex-col items-center gap-y-5">
           <p>
-            Toggdle fetches your Toggl weekly report and print it out
+            Toggdle fetches your Toggl weekly report and prints it out
             Wordle-style.
           </p>
           <div className="grid grid-cols-2 items-center gap-x-5 font-mono">

@@ -144,12 +144,13 @@ export default function Index() {
           <p>
             Each square is a 4-hour chunk starting from 00:00 to 23:59. They are
             colored according to the{" "}
-            <Link
-              to="https://en.wikipedia.org/wiki/52/17_rule"
+            <a
+              href="https://en.wikipedia.org/wiki/52/17_rule"
               className="font-bold"
+              rel="external nofollow"
             >
               52/17 rule
-            </Link>
+            </a>
             : ⬜ means no activity, 🟩 means within the 52/17 ratio, and 🟨
             means over it.
           </p>

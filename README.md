@@ -1,22 +1,13 @@
-# Welcome to Remix!
+# Toggdle
 
-- [Remix Docs](https://remix.run/docs)
+Toggdle fetches your Toggl weekly report and prints it out Wordle-style.
 
-## Development
-
-You will be utilizing Wrangler for local development to emulate the Cloudflare runtime. This is already wired up in your package.json as the `dev` script:
-
-```sh
-# start the remix dev server and wrangler
-$ npm run dev
+```
+2022-01-17  ⬜⬜🟨⬜🟩⬜
+2022-01-18  ⬜⬜🟩🟩🟩⬜
+2022-01-19  ⬜⬜🟩🟩🟩⬜
+2022-01-20  ⬜⬜🟩🟩⬜⬜
+2022-01-21  ⬜⬜🟨🟨🟩⬜
 ```
 
-Open up [http://127.0.0.1:8788](http://127.0.0.1:8788) and you should be ready to go!
-
-## Deployment
-
-Cloudflare Pages are currently only deployable through their Git provider integrations.
-
-If you don't already have an account, then [create a Cloudflare account here](https://dash.cloudflare.com/sign-up/pages) and after verifying your email address with Cloudflare, go to your dashboard and follow the [Cloudflare Pages deployment guide](https://developers.cloudflare.com/pages/framework-guides/deploy-anything).
-
-Configure the "Build command" should be set to `npm run build`, and the "Build output directory" should be set to `public`.
+Each square is a 4-hour chunk starting from 00:00 to 23:59. They are colored according to the [52/17 rule](https://en.wikipedia.org/wiki/52/17_rule): ⬜ means no activity, 🟩 means within the 52/17 ratio, and 🟨 means over it.

@@ -10,7 +10,11 @@ import {
 import styles from "~/styles/app.css";
 
 export const meta: MetaFunction = () => {
-  return { title: "Toggdle" };
+  return {
+    title: "Toggdle",
+    description:
+      "Toggdle fetches your Toggl weekly report and prints it out Wordle-style.",
+  };
 };
 
 export function links() {
@@ -27,7 +31,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <div className="flex flex-col items-center p-5 gap-y-5">
+        <div className="flex flex-col items-center gap-y-5 p-5">
           <h1 className="text-4xl font-bold">Toggdle</h1>
           <Outlet />
         </div>

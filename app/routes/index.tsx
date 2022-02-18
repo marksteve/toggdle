@@ -125,21 +125,12 @@ export default function Index() {
             Toggdle fetches your Toggl weekly report and prints it out
             Wordle-style.
           </p>
-          <div className="grid grid-cols-2 items-center gap-x-5 font-mono">
-            <div className="col-start-2 flex justify-between">
-              <span>🌄</span>
-              <span>🌃</span>
-            </div>
-            <div className="text-right text-sm">2022-01-17</div>
-            <div>⬜⬜🟨⬜🟩⬜</div>
-            <div className="text-right text-sm">2022-01-18</div>
-            <div>⬜⬜🟩🟩🟩⬜</div>
-            <div className="text-right text-sm">2022-01-19</div>
-            <div>⬜⬜🟩🟩🟩⬜</div>
-            <div className="text-right text-sm">2022-01-20</div>
-            <div>⬜⬜🟩🟩⬜⬜</div>
-            <div className="text-right text-sm">2022-01-21</div>
-            <div>⬜⬜🟨🟨🟩⬜</div>
+          <div className="flex flex-col">
+            <div>⬜⬜⬜⬜🟨🟩&nbsp;&nbsp;2022-02-07</div>
+            <div>⬜⬜⬜🟩🟩🟩&nbsp;&nbsp;2022-02-08</div>
+            <div>⬜⬜⬜🟩⬜🟨&nbsp;&nbsp;2022-02-09</div>
+            <div>⬜⬜⬜🟨🟩🟨&nbsp;&nbsp;2022-02-10</div>
+            <div>⬜⬜🟨🟩⬜⬜&nbsp;&nbsp;2022-02-11</div>
           </div>
           <p>
             Each square is a 4-hour chunk starting from 00:00 to 23:59. They are
@@ -201,20 +192,17 @@ export default function Index() {
           type="submit"
           className="rounded-full bg-[#E57CD8] text-xl leading-loose text-white"
         >
-          Get report
+          Gimme squares!
         </button>
       </Form>
       {data.squares.length ? (
-        <div className="grid grid-cols-2 items-center gap-x-5">
-          <div className="col-start-2 flex justify-between">
-            <span>🌄</span>
-            <span>🌃</span>
-          </div>
+        <div className="flex flex-col">
           {data.squares.map(([date, squares], i) => (
-            <Fragment key={i}>
-              <div className="font-mono text-sm">{date}</div>
-              <div className="text-center">{squares.join("")}</div>
-            </Fragment>
+            <div key={i}>
+              {squares.join("")}
+              &nbsp;&nbsp;
+              {date}
+            </div>
           ))}
         </div>
       ) : null}

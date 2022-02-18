@@ -150,7 +150,7 @@ export default function Index() {
             >
               52/17 rule
             </Link>
-            . ⬜ means no activity, 🟩 means within the 52/17 ratio, and 🟨
+            : ⬜ means no activity, 🟩 means within the 52/17 ratio, and 🟨
             means over it.
           </p>
         </div>

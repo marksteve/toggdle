@@ -2,16 +2,15 @@ import { flatGroup } from "d3-array";
 import { scaleQuantize } from "d3-scale";
 import { addDays, getHours } from "date-fns";
 import { utcToZonedTime } from "date-fns-tz";
-import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import type { LoaderFunction } from "remix";
-import { Form, useLoaderData } from "remix";
-import { getSession } from "~/sessions";
+import { Form, LoaderFunction, redirect, useLoaderData } from "remix";
+import { commitSession, getSession } from "~/sessions";
 
 const REST_RATIO = 1 - 17 / 52; // https://en.wikipedia.org/wiki/52/17_rule
 
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
+  const error = session.get("error");
   const credentials = session.get("credentials");
 
   const url = new URL(request.url);
@@ -29,11 +28,21 @@ export const loader: LoaderFunction = async ({ request }) => {
       "Content-Type": "application/json",
       Authorization: `Basic ${credentials}`,
     };
-    me = (
-      (await (
-        await fetch("https://api.track.toggl.com/api/v8/me", { headers })
-      ).json()) as any
-    ).data;
+    try {
+      me = (
+        (await (
+          await fetch("https://api.track.toggl.com/api/v8/me", { headers })
+        ).json()) as any
+      ).data;
+    } catch (err) {
+      session.unset("credentials");
+      session.flash("error", "Invalid API token");
+      return redirect("/", {
+        headers: {
+          "Set-Cookie": await commitSession(session),
+        },
+      });
+    }
     workspaces = await (
       await fetch("https://api.track.toggl.com/api/v8/workspaces", { headers })
     ).json();
@@ -78,6 +87,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     me,
     workspaces,
     squares,
+    error,
   };
 };
 
@@ -153,6 +163,9 @@ export default function Index() {
         >
           Set token
         </button>
+        {data.error ? (
+          <div className="text-center text-red-500">{data.error}</div>
+        ) : null}
       </Form>
     );
   }
